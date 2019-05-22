@@ -16,12 +16,11 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import ru.verkhovin.imagecompressor.api.dto.CompressRequest
 import ru.verkhovin.imagecompressor.api.CompressorApiController
+import ru.verkhovin.imagecompressor.api.dto.CompressRequest
 import ru.verkhovin.imagecompressor.api.dto.Response
 import ru.verkhovin.imagecompressor.api.dto.ResponseStatus
 import ru.verkhovin.imagecompressor.component.RequestHandler
-import java.lang.RuntimeException
 
 @RunWith(SpringRunner::class)
 @WebMvcTest(controllers = [CompressorApiController::class])
@@ -57,7 +56,8 @@ class CompressorApiControllerTest() {
             post("/compress")
                 .accept(MediaType.APPLICATION_JSON_UTF8)
                 .contentType(MediaType.MULTIPART_FORM_DATA_VALUE)
-                .param("file", "DUMMY_DATA"))
+                .param("file", "DUMMY_DATA")
+        )
             .andExpect(status().isOk)
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andReturn().response.contentAsString
@@ -77,7 +77,8 @@ class CompressorApiControllerTest() {
             post("/compress")
                 .accept(MediaType.APPLICATION_JSON_UTF8)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(ObjectMapper().writeValueAsString(request)))
+                .content(ObjectMapper().writeValueAsString(request))
+        )
             .andExpect(status().isOk)
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andReturn().response.contentAsString
@@ -95,7 +96,8 @@ class CompressorApiControllerTest() {
             post("/compress")
                 .accept(MediaType.APPLICATION_JSON_UTF8)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(ObjectMapper().writeValueAsString(request)))
+                .content(ObjectMapper().writeValueAsString(request))
+        )
             .andExpect(status().isOk)
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
             .andReturn().response.contentAsString
